@@ -1,4 +1,4 @@
-# [Kosheff]
+# [LKoshev]
 BackupPath="/Users/leonidkoshcheev/backups/project_1/" # Куда архивировать (создайтие эту директорию вручную)
 
 # Делаем бэкап базы данных при необходимости
@@ -14,7 +14,7 @@ BackupsCount=5 # Сколько бэкапов храним
 if [ $DbName ]; then
   echo "Делаем бэкап базы данных" "$DbName"
   # Бэкап БД будет сделан в директорию, в которой находится сам .sh скрипт
-  mysqldump -u"$DbUser" -p"$DbPass" --port="$DbPort" "$DbName" > "$DbName".sql
+  mysqldump -u"$DbUser" -p"$DbPass" --port="$DbPort" "$DbName" > "$TargetPath"/"$DbName".sql
 fi
 
 # Определяем номер следующего бэкапа
@@ -55,6 +55,10 @@ else
   # Удаляем крайний и делаем свежий вместо него
   rm -rf "$BackupPath""$j"_"$BackupName"
   $( tar -czvf "$BackupPath""$j"_"$BackupName" "$TargetPath" )
+fi
+
+if [ $DbName ]; then
+  rm -rf "$TargetPath"/"$DbName".sql
 fi
 
 Final="$BackupPath""$j"_"$BackupName"
