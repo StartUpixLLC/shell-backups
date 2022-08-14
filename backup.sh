@@ -66,4 +66,13 @@ Final="$BackupPath""$j"_"$BackupName"
 Size=$(wc -c $Final | awk '{print $1}')
 
 # При необходимости отправляем уведомление о завершении в telegram
-#curl "https://api.telegram.org/bot[BOT:TOKEN]//sendMessage?chat_id=-[Chat ID]&parse_mode=html&text=<b>\[Leonidkoshcheev\]</b> Backup $Final is done. File size: <b>"$Size"b</b>" >/dev/null 2>&1
+# Простой способ отправить сообщение в телеграм с помощью curl
+# curl "https://api.telegram.org/bot[BOT:TOKEN]//sendMessage?chat_id=-[Chat ID]&parse_mode=html&text=<b>\[MESSAGE TITLE\]</b> Backup $Final is done. File size: <b>"$Size"b</b>" >/dev/null 2>&1
+
+# Отправка сообщения с прикрепленным архивом. На данный момент телеграм позволяет отправлять файлы размеров до 50mb с помощью API.
+#tlg -t [BOT:TOKEN] \
+#-c -1001374345271 \
+#-f "$Final" \
+#-H "<b>[StartUpix.ru]</b>
+#Backup of $Final is done.
+#File size: <b>"$Size"b</b>"
