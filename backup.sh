@@ -71,8 +71,8 @@ Size=$(wc -c $Final | awk '{print $1}')
 
 # Отправка сообщения с прикрепленным архивом. На данный момент телеграм позволяет отправлять файлы размеров до 50mb с помощью API.
 #tlg -t [BOT:TOKEN] \
-#-c -1001374345271 \
+#-c -[CHAT ID] \
 #-f "$Final" \
-#-H "<b>[StartUpix.ru]</b>
+#-H "<b>[MESSAGE TITLE]</b>
 #Backup of $Final is done.
 #File size: <b>"$Size"b</b>"
