@@ -15,6 +15,7 @@ if [ $DbName ]; then
   echo "Делаем бэкап базы данных" "$DbName"
   # Бэкап БД будет сделан в директорию, в которой находится сам .sh скрипт
   mysqldump -u"$DbUser" -p"$DbPass" --port="$DbPort" "$DbName" > "$TargetPath"/"$DbName".sql
+  # docker exec [CONTAINER] /usr/bin/mysqldump -u"$DbUser" --password="$DbPass" [DB_NAME] > "$TargetPath"/"$DbName".sql
 fi
 
 # Определяем номер следующего бэкапа
